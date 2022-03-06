@@ -5,9 +5,9 @@ require_once $_SERVER["DOCUMENT_ROOT"].'/Event Registration System/BusinessServi
 //Prevent Access Without Log In
 $account_type = $_SESSION['account_type'];
 if($account_type=="None"){
-  $message = "Please Log In!.";
-  echo "<script type='text/javascript'>alert('$message');</script>";
-  header("Location:../../ApplicationLayer/Manage Login and Registration View/Login.php");
+  echo "<script type='text/javascript'>alert('You must login!');
+    window.location='../../ApplicationLayer/Manage Login and Registration View/Login.php';
+    </script>";
 }
 
 if ($account_type == "participant"){
@@ -63,21 +63,15 @@ if(isset($_POST['QRCODE'])){
 		if($account_type== "admin"){
 			include '../../includes/AdminTopNaviBar.php';
 		}
-		else{
-			if($account_type== "organizer"){
-				include '../../includes/EventOrganizerTopNaviBar.php';
-			}
-			else{
-				if($account_type== "participant"){
-					include '../../includes/ParticipantTopNaviBar.php';
-				}
-				else{
-					$message = "Please Login!";
-					echo "<script type='text/javascript'>alert('$message');
-            		window.location = 'loginPage.php';</script>";
-				}
-			}
+
+		if($account_type== "organizer"){
+			include '../../includes/EventOrganizerTopNaviBar.php';
 		}
+
+		if($account_type== "participant"){
+			include '../../includes/ParticipantTopNaviBar.php';
+		}
+
 	?>
 </head>
 

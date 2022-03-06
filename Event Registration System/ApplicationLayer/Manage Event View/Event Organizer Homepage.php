@@ -1,18 +1,21 @@
 <?php
 session_start();
 require_once $_SERVER["DOCUMENT_ROOT"].'/Event Registration System/BusinessServiceLayer/Controller/Event Controller.php';
-$event_organizer_id = $_SESSION['event_organizer_id'];
-$account_type = $_SESSION['account_type'];
 
 //Prevent Access Without Log In
-// $account_type = $_SESSION['account_type'];
-// if($account_type=="None"){
-//   $message = "Please Log In!.";
-//   echo "<script type='text/javascript'>alert('$message');</script>";
-//   header("Location:../../ApplicationLayer/Manage Login and Registration View/Login.php");
-// }
+$account_type = $_SESSION['account_type'];
+if($account_type=="None"){
+  echo "<script type='text/javascript'>alert('You must login!');
+    window.location='../../ApplicationLayer/Manage Login and Registration View/Login.php';
+    </script>";
+}
+
+$event_organizer_id = $_SESSION['event_organizer_id'];
 
 $event_category = $_SESSION['event_category'];
+
+//Account Information Reset
+$_SESSION['information'] = 0;
 
 if($event_category=="all"){
   $viewAllEventOrganizer =  new eventController();

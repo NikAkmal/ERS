@@ -2,16 +2,16 @@
 session_start();
 require_once $_SERVER["DOCUMENT_ROOT"].'/Event Registration System/BusinessServiceLayer/Controller/Event Controller.php';
 $admin_id = $_SESSION['admin_id'];
-$account_type = $_SESSION['account_type'];
 
 //Prevent Access Without Log In
-// $account_type = $_SESSION['account_type'];
-// if($account_type=="None"){
-//   $message = "Please Log In!.";
-//   echo "<script type='text/javascript'>alert('$message');</script>";
-//   header("Location:../../ApplicationLayer/Manage Login and Registration View/Login.php");
-// }
+$account_type = $_SESSION['account_type'];
+if($account_type=="None"){
+  echo "<script type='text/javascript'>alert('You must login!');
+    window.location='../../ApplicationLayer/Manage Login and Registration View/Login.php';
+    </script>";
+}
 
+$admin_id = $_SESSION['admin_id'];
 $event_category = $_SESSION['event_category'];
 
 if($event_category=="all"){

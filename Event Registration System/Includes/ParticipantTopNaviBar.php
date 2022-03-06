@@ -11,10 +11,10 @@
    
     <div>
       <div id="navbar" class="topnav">
-        <a href="Participant Homepage.php">ERS</a>
-        <a href="Participant Homepage.php">HOMEPAGE</a>
-        <a href="History Page.php">HISTORY PAGE</a>
-        <a href="ApplicationLayer/Manage Account View/Account Information.php">ACCOUNT INFORMATION</a>
+        <a href="../../ApplicationLayer/Manage Event View/Participant Homepage.php">ERS</a>
+        <a href="../../ApplicationLayer/Manage Event View/Participant Homepage.php">HOMEPAGE</a>
+        <a href="../../ApplicationLayer/Manage Event View/History Page.php">HISTORY PAGE</a>
+        <a href="../../ApplicationLayer/Manage Account View/Account Information Page.php">ACCOUNT INFORMATION</a>
         <a <input type="button" id="btn" name="LOGOUT" value="LOGOUT" 
         onclick="location.href='../../ApplicationLayer/Manage Login and Registration View/Login.php'">LOGOUT</a>
       </div>

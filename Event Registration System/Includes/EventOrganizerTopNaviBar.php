@@ -11,10 +11,11 @@
 
     <div>
       <div id="navbar" class="topnav">
-        <a href="Event Organizer Homepage.php">ERS</a>
-        <a href="Event Organizer Homepage.php">HOMEPAGE</a>
-        <a href="Create Event.php">CREATE EVENT</a>
-        <a href="Event Organizer Report.php">REPORT</a>
+        <a href="../../ApplicationLayer/Manage Event View/Event Organizer Homepage.php">ERS</a>
+        <a href="../../ApplicationLayer/Manage Event View/Event Organizer Homepage.php">HOMEPAGE</a>
+        <a href="../../ApplicationLayer/Manage Event View/Create Event.php">CREATE EVENT</a>
+        <a href="../../ApplicationLayer/Manage Event View/Report Page.php">REPORT</a>
+        <a href="../../ApplicationLayer/Manage Account View/Account Information Page.php">ACCOUNT INFORMATION</a>
         <a <input type="button" id="btn" name="LOGOUT" value="LOGOUT" 
         onclick="location.href='../../ApplicationLayer/Manage Login and Registration View/Login.php'">LOGOUT</a>
       </div>
@@ -42,7 +43,7 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-    width: 20%;
+    width: 16%;
   }
 
   #navbar a:hover {

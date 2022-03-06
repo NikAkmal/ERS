@@ -5,19 +5,12 @@ $participant_id = $_SESSION['participant_id'];
 $account_type = $_SESSION['account_type'];
 
 //Prevent Access Without Log In
-// $account_type = $_SESSION['account_type'];
-// if($account_type=="None"){
-//   $message = "Please Log In!.";
-//   echo "<script type='text/javascript'>alert('$message');</script>";
-//   header("Location:../../ApplicationLayer/Manage Login and Registration View/Login.php");
-// }
-
-//Test Data
-// $admin_id = "1";
-// $event_organizer_id  = "1";
-// $participant_id = "1";
-// $account_type = "participant";
-//$account_type = "admin" , "organizer", "participant";
+$account_type = $_SESSION['account_type'];
+if($account_type=="None"){
+  echo "<script type='text/javascript'>alert('You must login!');
+    window.location='../../ApplicationLayer/Manage Login and Registration View/Login.php';
+    </script>";
+}
 
 //Retrieve all event list {default}
 $event_category = $_SESSION['event_category'];

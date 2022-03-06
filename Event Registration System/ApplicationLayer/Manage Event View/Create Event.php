@@ -2,16 +2,18 @@
 session_start();
 require_once $_SERVER["DOCUMENT_ROOT"].'/Event Registration System/BusinessServiceLayer/Controller/Event Controller.php';
 
-$event_organizer_id  = $_SESSION['event_organizer_id'];
-$account_type = $_SESSION['account_type'];
-
 //Prevent Access Without Log In
-// $account_type = $_SESSION['account_type'];
-// if($account_type=="None"){
-//   $message = "Please Log In!.";
-//   echo "<script type='text/javascript'>alert('$message');</script>";
-//   header("Location:../../ApplicationLayer/Manage Login and Registration View/Login.php");
-// }
+$account_type = $_SESSION['account_type'];
+if($account_type=="None"){
+  echo "<script type='text/javascript'>alert('You must login!');
+    window.location='../../ApplicationLayer/Manage Login and Registration View/Login.php';
+    </script>";
+}
+
+$event_organizer_id  = $_SESSION['event_organizer_id'];
+
+//Account Information Reset
+$_SESSION['information'] = 0;
 
 //Upload Event Poster
 if(isset($_POST['REQUEST']) && !empty($_FILES["event_poster"]["name"])){
@@ -132,37 +134,37 @@ body {
 				<p>
 				<tr><th>
 					<label>EVENT NAME:</label></th><th>
-					<input type="text" id="event_name" name="event_name"	/></th></tr>
+					<input type="text" id="event_name" name="event_name"	required></th></tr>
 				</p>
 				<p>
 				<tr><th>
 					<label>EVENT VENUE:</label></th><th>
-					<input type="text" id="event_venue" name="event_venue"	/></th></tr>
+					<input type="text" id="event_venue" name="event_venue"	required></th></tr>
 				</p>
 				<p>
 				<tr><th>
 					<label>EVENT START DATE:</label></th><th>
-					<input type="date" id="event_start_date" name="event_start_date"></th></tr>
+					<input type="date" id="event_start_date" name="event_start_date" required></th></tr>
 				</p>			
 				<p>
 				<tr><th>
 					<label>EVENT END DATE:</label></th><th>
-					<input type="date" id="event_end_date" name="event_end_date"></th></tr>
+					<input type="date" id="event_end_date" name="event_end_date" 	required></th></tr>
 				</p>				
 				<p>
 				<tr><th>
 					<label >EVENT BEGIN TIME:</label></th><th>
-					<input type="time" id="event_begin_time" name="event_begin_time"></th></tr>
+					<input type="time" id="event_begin_time" name="event_begin_time"	required></th></tr>
 				</p>
 				<p>
 				<tr><th>
 					<label >EVENT END TIME:</label></th><th>
-					<input type="time" id="event_end_time" name="event_end_time"></th></tr>
+					<input type="time" id="event_end_time" name="event_end_time"	required></th></tr>
 				</p>			
 				<p>
 				<tr><th>
 					<label>EVENT DETAIL:</label></th><th>
-					<input type="text" id="event_detail" name="event_detail"/></th></tr>
+					<input type="text" id="event_detail" name="event_detail"	required></th></tr>
 				</p>
 				<p>
 				<tr><th>
@@ -195,7 +197,7 @@ body {
 				<table id="table">
 					<tr>
 					<th><input type="button" id="btn" name="CANCEL" value="CANCEL" 
-					onclick="location.href='../../ApplicationLayer/Manage Login and Registration View/Login.php'">
+					onclick="location.href='../../ApplicationLayer/Manage Event View/Event Organizer Homepage.php'">
 					</th>
 					<th><input type="submit" id="btn" name="REQUEST" value="REQUEST" /></th>
 					</tr>

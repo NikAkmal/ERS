@@ -10,23 +10,43 @@ class loginRegistrationModel{
         return $pdo;
     }
 
-    //Used for Login Validation
+        //Login
+        //Used for Login Validation for Admin
         function AdminAccountData(){
             $sql = "select * from admin";
             return loginRegistrationModel::connect()->query($sql);;
             }
 
+        //Login
+        //Used for Login Validation for Participant
         function ParticipantAccountData(){
             $sql = "select * from participant";
             return loginRegistrationModel::connect()->query($sql);;
             }
 
+        //Login
+        //Used for Login Validation for Organizer
         function EventOrganizerAccountData(){
             $sql = "select * from event_organizer";
             return loginRegistrationModel::connect()->query($sql);;
             }
+
+        //Register
+        //View All Participant Username
+        function participantUsername(){
+            $sql = "select * from participant";
+            return loginRegistrationModel::connect()->query($sql);;
+        }
+
+        //Register
+        //View All Event Organizer Username
+        function organizerUsername(){
+            $sql = "select * from event_organizer";
+            return loginRegistrationModel::connect()->query($sql);;
+        }
     
-    //Used for Registration
+        //Register
+        //Used for Participant Registration
         function registerParticipant(){
             $sql = "insert into participant (participant_name, participant_username, participant_password, participant_matric_id, 
             participant_phone_number, participant_address, participant_account_status, account_type, participant_profile_picture)
@@ -42,6 +62,8 @@ class loginRegistrationModel{
             return $stmt;
         }
 
+        //Register
+        //Used for Event Organizer Registration
         function registerEventOrganizer(){
             $sql = "insert into event_organizer (event_organizer_name, event_organizer_username, event_organizer_password,  
             event_organizer_phone_number, event_organizer_address, event_organizer_account_status, account_type, event_organizer_profile_picture)

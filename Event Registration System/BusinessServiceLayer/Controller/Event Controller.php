@@ -4,7 +4,8 @@ require_once $_SERVER["DOCUMENT_ROOT"].'/Event Registration System/BusinessServi
 
 class eventController
 {
-    //View All Participant 
+    //View All Participant
+    //Check first before deleting 
     function viewAllParticipant(){
         $viewAllParticipant = new eventModel();
         return $viewAllParticipant->viewAllParticipant();
@@ -90,7 +91,8 @@ class eventController
     }
 
     //Event Organizer Homepage
-    //Used for viewing all event list for Admin
+    //Report Page
+    //Used for viewing all event list for Event Organizer
     function viewAllEventOrganizer($event_organizer_id){
         $viewAllEventOrganizer = new eventModel();
         $viewAllEventOrganizer->event_organizer_id = $event_organizer_id;
@@ -98,7 +100,7 @@ class eventController
     }
 
     //Event Organizer Homepage
-    //Used for viewing selected event category for Admin
+    //Used for viewing selected event category for Event Organizer
     function viewEventCategoryOrganizer($event_organizer_id, $event_category){
         $viewEventCategoryOrganizer = new eventModel();
         $viewEventCategoryOrganizer->event_organizer_id = $event_organizer_id;
@@ -161,6 +163,90 @@ class eventController
         }
     }
     
+    //Report Page
+    //Event Organizer Report
+    //Participated List
+    function participatedReport($event_id){
+        $participatedReport = new eventModel();
+        $participatedReport->event_id= $event_id;
+        return $participatedReport->participatedReport();
+    }
+
+    //Report Page
+    //Event Organizer Report
+    //Report Title Display for Bar Chart
+    function participatedReportTitle($event_id){
+        $participatedReportTitle = new eventModel();
+        $participatedReportTitle->event_id= $event_id;
+        return $participatedReportTitle->participatedReportTitle();
+    }
+
+    //Report Page
+    //Event Organizer Report
+    //Report Total Participant Registered Display for Bar Chart
+    function totalParticipated($event_id){
+        $totalParticipated = new eventModel();
+        $totalParticipated->event_id= $event_id;
+        return $totalParticipated->totalParticipated();
+    }
+
+    //Report Page
+    //Admin Report
+    //Total Admin in the system
+    function totalAdmin(){
+        $totalAdmin = new eventModel();
+        return $totalAdmin->totalAdmin();
+    }
+
+    //Report Page
+    //Admin Report
+    //Total Event Organizer in the system
+    function totalOrganizer(){
+        $totalOrganizer = new eventModel();
+        return $totalOrganizer->totalOrganizer();
+    }
+
+    //Report Page
+    //Admin Report
+    //Total Participant in the system
+    function totalParticipant(){
+        $totalParticipant = new eventModel();
+        return $totalParticipant->totalParticipant();
+    }
+
+    //Report Page
+    //Admin Report
+    //Total Completed Event in the system
+    function totalCompletedEvent(){
+        $totalCompletedEvent = new eventModel();
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $date = date('Y-m-d');
+        $totalCompletedEvent->date = $date;
+        return $totalCompletedEvent->totalCompletedEvent();
+    }
+
+    //Report Page
+    //Admin Report
+    //Total Today Event in the system
+    function totalTodayEvent(){
+        $totalTodayEvent = new eventModel();
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $date = date('Y-m-d');
+        $totalTodayEvent->date = $date;
+        return $totalTodayEvent->totalTodayEvent();
+    }
+
+    //Report Page
+    //Admin Report
+    //Total Upcoming Event in the system
+    function totalUpcomingEvent(){
+        $totalUpcomingEvent = new eventModel();
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $date = date('Y-m-d');
+        $totalUpcomingEvent->date = $date;
+        return $totalUpcomingEvent->totalUpcomingEvent();
+    }
+
     //Create Event Page
     //Used for creating event
     function createEvent($event_organizer_id, $event_poster, $event_brochure){

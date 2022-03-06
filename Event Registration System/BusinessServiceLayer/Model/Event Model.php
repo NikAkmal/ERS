@@ -10,7 +10,8 @@ class eventModel{
         return $pdo;
     }
 
-        //View All Participant 
+        //View All Participant
+        //Check first before deleting  
         function viewAllParticipant(){
             $sql = "select * from participant";
             return eventModel::connect()->query($sql);;
@@ -99,7 +100,8 @@ class eventModel{
         }
 
         //Event Organizer Homepage
-        //Used for viewing all event list for Admin
+        //Report Page
+        //Used for viewing all event list for Event Organizer
         function viewAllEventOrganizer(){
             $sql = "select * from event where event_organizer_id = :event_organizer_id order by event_start_date desc";
             $args = [':event_organizer_id'=>$this->event_organizer_id];
@@ -109,7 +111,7 @@ class eventModel{
         }
 
         //Event Organizer Homepage
-        //Used for viewing selected event category for Admin
+        //Used for viewing selected event category for Event Organizer
         function viewEventCategoryOrganizer(){
             $sql = "select * from event where event_organizer_id = :event_organizer_id and
             event_category = :event_category order by event_start_date desc";
@@ -127,7 +129,7 @@ class eventModel{
             $stmt = eventModel::connect()->prepare($sql);
             $stmt->execute($args);
             return $stmt;
-            }
+        }
         
         //Information Page
         //Update Event Request Status
@@ -137,7 +139,7 @@ class eventModel{
             $stmt = eventModel::connect()->prepare($sql);
             $stmt->execute($args);
             return $stmt;
-            } 
+        } 
 
         //Information Page
         //Update Event Detail
@@ -158,6 +160,107 @@ class eventModel{
         function updateQRCODE(){
             $sql = "update event set event_qr_code=:event_qr_code where event_id=:event_id"; 
             $args = [':event_qr_code'=>$this->event_qr_code, ':event_id'=>$this->event_id];
+            $stmt = eventModel::connect()->prepare($sql);
+            $stmt->execute($args);
+            return $stmt;
+        }
+
+        //Report Page
+        //Event Organizer Report
+        //Participated List
+        function participatedReport(){
+            $sql = "select * from registration_record  inner join participant 
+            ON participant.participant_id = registration_record.participant_id 
+            where registration_record.event_id = :event_id";
+            $args = [':event_id'=>$this->event_id];
+            $stmt = eventModel::connect()->prepare($sql);
+            $stmt->execute($args);
+            return $stmt;
+        }
+
+        //Report Page
+        //Event Organizer Report
+        //Report Title Display for Bar Chart
+        function participatedReportTitle(){
+            $sql = "select * from event
+            where event.event_id = :event_id";
+            $args = [':event_id'=>$this->event_id];
+            $stmt = eventModel::connect()->prepare($sql);
+            $stmt->execute($args);
+            return $stmt;
+        }
+
+        //Report Page
+        //Event Organizer Report
+        //Report Total Participant Registered Display for Bar Chart
+        function totalParticipated(){
+            $sql = "select count(event_id) as total_participated
+            from registration_record 
+            where registration_record.event_id = :event_id";
+            $args = [':event_id'=>$this->event_id];
+            $stmt = eventModel::connect()->prepare($sql);
+            $stmt->execute($args);
+            return $stmt;
+        }
+
+        //Report Page
+        //Admin Report
+        //Total Admin in the system
+        function totalAdmin(){
+            $sql = "select count(admin_id) as total_admin
+            from admin";
+            return eventModel::connect()->query($sql);;
+        }
+
+        //Report Page
+        //Admin Report
+        //Total Event Organizer in the system
+        function totalOrganizer(){
+            $sql = "select count(event_organizer_id) as total_organizer
+            from event_organizer";
+            return eventModel::connect()->query($sql);;
+        }
+
+        //Report Page
+        //Admin Report
+        //Total Participant in the system
+        function totalParticipant(){
+            $sql = "select count(participant_id) as total_participant
+            from participant";
+            return eventModel::connect()->query($sql);;
+        }
+
+        //Report Page
+        //Admin Report
+        //Total Completed Event in the system
+        function totalCompletedEvent(){
+            $sql = "select count(event_id) as total_completed_event
+            from event where event_request_status = 'APPROVE' and :date > event_end_date";
+            $args = [':date'=>$this->date];
+            $stmt = eventModel::connect()->prepare($sql);
+            $stmt->execute($args);
+            return $stmt;
+        }
+
+        //Report Page
+        //Admin Report
+        //Total Today Event in the system
+        function totalTodayEvent(){
+            $sql = "select count(event_id) as total_today_event
+            from event where event_request_status = 'APPROVE' and :date <= event_end_date and :date >= event_start_date";
+            $args = [':date'=>$this->date];
+            $stmt = eventModel::connect()->prepare($sql);
+            $stmt->execute($args);
+            return $stmt;
+        }
+
+        //Report Page
+        //Admin Report
+        //Total Upcoming Event in the system
+        function totalUpcomingEvent(){
+            $sql = "select count(event_id) as total_upcoming_event
+            from event where event_request_status = 'APPROVE' and :date < event_start_date";
+            $args = [':date'=>$this->date];
             $stmt = eventModel::connect()->prepare($sql);
             $stmt->execute($args);
             return $stmt;
